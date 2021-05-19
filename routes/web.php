@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AllController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AllController::class, 'home'])->name('home');
 
 Route::get('/admin/dashboard', [AllController::class, 'admin'])->middleware(['auth'])->name('dashboard');
+Route::get('/admin/avatar', [AllController::class, 'avatar'])->middleware(['auth'])->name('avatar');
 
-Route::resource('/admin/user', UserController::class)->middleware(['auth', 'admin']);
+Route::get('/admin/user', [UserController::class, 'index'])->middleware(['auth', 'admin'])->name('user.index');
+Route::delete('/admin/user/{id}/delete', [UserController::class, 'destroy'])->name('user.destroy');
+Route::get('/admin/user/{id}', [UserController::class, 'show'])->name('user.show');
+Route::get('/admin/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/admin/user/{id}/update', [UserController::class, 'update'])->name('user.update');
 
 require __DIR__.'/auth.php';

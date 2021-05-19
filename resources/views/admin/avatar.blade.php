@@ -12,25 +12,19 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="grid grid-cols-3 gap-4 text-center">
-                            @foreach ($admin as $user)
+                            @foreach ($avatars as $avatar)
                             <div class="py-20 border">
-                                <h2 class="text-3xl">{{ $user->nom }} {{ $user->prenom }}</h2>
-                                <p>{{ $user->email }}</p>
-                                <img src="{{asset('img/avatar-1.jpg')}}" alt="avatar1">
-                                @if ($user->id == Auth::id())
-                                <p class="font-bold text-green-400 my-5">Tu es connecté</p>
-                                @else
+                                <img src="{{asset($avatar->imgAva)}}" alt="avatar">
                                 <div class="my-5 flex justify-center">
-                                    <a href="{{ route('user.show', $user->id) }}"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">show</a>
-                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                    {{-- <a href="{{ route('avatar.show', $item->id) }}"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">show</a> --}}
+                                    {{-- <form action="{{ route('avatar.destroy', $item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button
                                             class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Delete</button>
-                                    </form>
+                                    </form> --}}
                                 </div>
-                                @endif
                             </div>
                             @endforeach
                         </div>

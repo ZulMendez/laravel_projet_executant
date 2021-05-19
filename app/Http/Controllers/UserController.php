@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avatar;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -50,10 +51,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $id)
     {
-        $roles = Role::all();
-        return view('admin.user.edit', compact('user', 'roles'));
+        $user = $id;
+        $avatars = Avatar::all();
+        return view('admin.user.edit', compact('user', 'avatars'));
     }
 
     /**
@@ -63,21 +65,22 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $id)
     {
         $request->validate([
             'nom' => ['required'],
             'prenom' => ['required'],
             'email' => ['required'],
             'age' => ['required', 'numeric'],
-            'avatar' => ['required'],
+            'avatar_id' => ['required'],
             'role_id' => ['required', 'numeric'],
         ]);
+        $user = $id;
         $user->nom = $request->nom;
         $user->prenom = $request->prenom;
         $user->email = $request->email;
         $user->age = $request->age;
-        $user->avatar = $request->avatar;
+        $user->avatar_id = $request->avatar_id;
         $user->role_id = $request->role_id;
         $user->save();
         return redirect()->route('user.index')->with('success', 'Utilisateur ' . $user->id .' bien modifié !');
@@ -89,9 +92,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $id)
     {
-        $user->delete();
-        return redirect()->back()->with('warning', 'Utilisateur ' . $user->prenom .' supprimé !');
+        $id->delete();
+        return redirect()->back()->with('warning', 'Utilisateur supprimé !');
     }
 }

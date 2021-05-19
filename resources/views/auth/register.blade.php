@@ -72,7 +72,6 @@
                 <option value="{{$avatar->id}}">{{$avatar->imgAva}}</option>
                     @endforeach
                 </select>
-                {{-- <x-input id="avatar" class="block mt-1 w-full" type="text" name="avatar" :value="old('avatar')" required autofocus /> --}}
             </div>
         </form>
     </x-auth-card>
