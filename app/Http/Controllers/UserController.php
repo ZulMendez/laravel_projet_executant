@@ -54,7 +54,7 @@ class UserController extends Controller
     public function edit(User $id)
     {
         $user = $id;
-        $avatars = Avatar::all();
+        $avatars = Avatar::all()->where('role_id', '!=', 1);
         return view('admin.user.edit', compact('user', 'avatars'));
     }
 

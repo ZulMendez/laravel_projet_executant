@@ -55,15 +55,6 @@
                                 type="password"
                                 name="password_confirmation" required />
             </div>
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
 
             <div>
                 <x-label for="avatar" :value="__('Avatar')" />
@@ -72,6 +63,16 @@
                 <option value="{{$avatar->id}}">{{$avatar->imgAva}}</option>
                     @endforeach
                 </select>
+            </div>
+            
+            <div class="flex items-center justify-end mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                    {{ __('Already registered?') }}
+                </a>
+
+                <x-button class="ml-4">
+                    {{ __('Register') }}
+                </x-button>
             </div>
         </form>
     </x-auth-card>

@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Users list') }}
         </h2>
     </x-slot>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-5">
+        <div class="mx-auto sm:px-6 lg:px-8">
             @include('layouts.flash')
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="container mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 mx-auto bg-white border-b border-gray-200">
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
@@ -26,7 +26,7 @@
                                 <td class="border px-4 py-2">{{ $user->prenom }} | {{ $user->nom }}</td>
                                 <td class="border px-4 py-2">{{ $user->age }}y</td>
                                 <td class="border px-4 py-2">{{ $user->email }}</td>
-                                <td class="border px-4 py-2">{{ $user->avatar->imgAva }}</td>
+                                <td class="border px-4 py-2">{{ $user->imgAva }}</td>
                                 <td class="border px-4 py-2">{{ $user->role->nom }}</td>
                                 <td class="border px-4 py-2 flex justify-center">
                                     <a href="{{ route('user.edit', $user->id) }}"

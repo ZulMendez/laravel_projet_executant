@@ -16,23 +16,23 @@ class AvatarSeeder extends Seeder
     {
         DB::table('avatars')->insert([
             [
-                'imgAva' => 'avatar-1.jpg',
+                'imgAva' => 'avatar1.jpg',
                 'created_at' => now(),
             ],
             [
-                'imgAva' => 'avatar-2.jpg',
+                'imgAva' => 'avatar2.jpg',
                 'created_at' => now(),
             ],
             [
-                'imgAva' => 'avatar-3.jpg',
+                'imgAva' => 'avatar3.jpg',
                 'created_at' => now(),
             ],
             [
-                'imgAva' => 'avatar-4.jpg',
+                'imgAva' => 'avatar4.jpg',
                 'created_at' => now(),
             ],
             [
-                'imgAva' => 'avatar-5.jpg',
+                'imgAva' => 'avatar5.jpg',
                 'created_at' => now(),
             ],
         ]);
