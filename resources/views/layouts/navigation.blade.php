@@ -35,7 +35,7 @@
                                 <x-dropdown-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    {{ __('Log out') }}
+                                    {{ __('Logout') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
@@ -51,13 +51,13 @@
                     </div>
     
                     <div class="hidden py-3 space-x-8 sm:-my-px sm:flex">
-                        <x-nav-link :href="route('avatar')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('avatar.index')" :active="request()->routeIs('dashboard')">
                             {{ __('Avatars') }}
                         </x-nav-link>
                     </div>
     
                     <div class="hidden py-3 space-x-8 sm:-my-px sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('image.index')" :active="request()->routeIs('dashboard')">
                             {{ __('Images') }}
                         </x-nav-link>
                     </div>

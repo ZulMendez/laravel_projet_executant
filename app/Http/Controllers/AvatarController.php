@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avatar;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AvatarController extends Controller
 {
@@ -14,7 +16,8 @@ class AvatarController extends Controller
      */
     public function index()
     {
-        //
+        $avatars = Avatar::all()->slice(1);
+        return view('admin.avatar.main', compact('avatars'));
     }
 
     /**
@@ -24,7 +27,7 @@ class AvatarController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.avatar.create');
     }
 
     /**
@@ -35,7 +38,28 @@ class AvatarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $avatar = Avatar::all()->slice(1);
+        request()->validate([
+            "nom" => ["required"],
+        ]);
+
+        if (count($avatar) > 5) {
+            return redirect()->route('avatar.index')->with('warning', "Demande refusé, la limite est atteinte");
+        }
+        $avatar = new Avatar();
+        
+        if ($request->imgAava) {
+            $request->file('imgAva')->storePublicly('img/', 'public');
+            $avatar->imgAva = $request->file('imgAva')->hashName();
+        } else {
+            $fichierURL = file_get_contents($request->srcURL);
+            $lien = $request->srcURL;
+            $token = substr($lien, strrpos($lien, '/') + 1);
+            Storage::disk('public')->put('img/'.$token ,$fichierURL);
+            $avatar->imgAva = $token;
+        }
+        $avatar->save();
+        return redirect()->route('avatar.index')->with('success', 'Avatar bien ajouté');
     }
 
     /**
@@ -80,6 +104,12 @@ class AvatarController extends Controller
      */
     public function destroy(Avatar $avatar)
     {
-        //
+        $users = User::all()->where('avatar_id', $avatar->id);
+        foreach ($users as $user) {
+            $user->avatar_id = 1;
+            $user->save();
+        }
+        $avatar->delete();
+        return redirect()->route('avatar.index')->with('warning', 'Avatar bien supprimé');
     }
 }

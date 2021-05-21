@@ -35,6 +35,10 @@ class AvatarSeeder extends Seeder
                 'imgAva' => 'avatar5.jpg',
                 'created_at' => now(),
             ],
+            [
+                'imgAva' => 'avatar6.jpg',
+                'created_at' => now(),
+            ],
         ]);
     }
 }
