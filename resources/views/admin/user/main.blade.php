@@ -23,10 +23,13 @@
                         <tbody>
                             @forelse ($users as $user)
                             <tr class="text-center">
+                                <td class="py-4 px-6 border-b border-grey-light">
+                                    <img width="60" src="{{ asset('img/' . $user->avatar->imgAva) }}"
+                                        alt="avatar">
+                                </td>
                                 <td class="border px-4 py-2">{{ $user->prenom }} | {{ $user->nom }}</td>
-                                <td class="border px-4 py-2">{{ $user->age }}y</td>
+                                <td class="border px-4 py-2">{{ $user->age }}</td>
                                 <td class="border px-4 py-2">{{ $user->email }}</td>
-                                <td class="border px-4 py-2">{{ $user->imgAva }}</td>
                                 <td class="border px-4 py-2">{{ $user->role->nom }}</td>
                                 <td class="border px-4 py-2 flex justify-center">
                                     <a href="{{ route('user.edit', $user->id) }}"

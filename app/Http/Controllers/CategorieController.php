@@ -14,7 +14,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categorie::all();
+        return view('admin.categorie.main', compact('categories'));
     }
 
     /**
@@ -24,7 +25,7 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categorie.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required',
+        ]);
+        $categorie = new Categorie();
+        $categorie->nomCat = $request->nomCat;
+        $categorie->save();
+        return redirect()->route('categorie.index')->with('success', 'Une nouvelle categorie ajoutée !');
     }
 
     /**
@@ -46,7 +53,7 @@ class CategorieController extends Controller
      */
     public function show(Categorie $categorie)
     {
-        //
+
     }
 
     /**
@@ -57,7 +64,8 @@ class CategorieController extends Controller
      */
     public function edit(Categorie $categorie)
     {
-        //
+        return view('admin.categorie.edit', compact('categorie'));
+
     }
 
     /**
@@ -69,7 +77,12 @@ class CategorieController extends Controller
      */
     public function update(Request $request, Categorie $categorie)
     {
-        //
+        $request->validate([
+            'nom' => 'required',
+        ]);
+        $categorie->nomCat = $request->nomCat;
+        $categorie->save();
+        return redirect()->route('categorie.index')->with('success', 'categorie ' . $request->nom .' modifiée !');
     }
 
     /**
@@ -80,6 +93,7 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
-        //
+        $categorie->delete();
+        return redirect()->back()->with('warning', 'Categorie supprimé avec toutes les images associées');
     }
 }

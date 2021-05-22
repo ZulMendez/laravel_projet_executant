@@ -39,9 +39,9 @@ class AvatarController extends Controller
     public function store(Request $request)
     {
         $avatar = Avatar::all()->slice(1);
-        request()->validate([
-            "nom" => ["required"],
-        ]);
+        // request()->validate([
+        //     "nom" => ["required"],
+        // ]);
 
         if (count($avatar) > 5) {
             return redirect()->route('avatar.index')->with('warning', "Demande refusé, la limite est atteinte");

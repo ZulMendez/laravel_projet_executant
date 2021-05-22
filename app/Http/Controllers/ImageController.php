@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -14,7 +16,9 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return view('admin.images.main');
+        // $this->authorize("admin");
+        $images = Image::all();
+        return view('admin.image.main', compact('images'));
     }
 
     /**
@@ -24,7 +28,8 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Categorie::all();
+        return view('admin.image.create', compact('categories'));
     }
 
     /**
@@ -35,7 +40,29 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $this->authorize("admin");
+        request()->validate([
+            "nom" => ["required"],
+            // "src" => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],    
+        ]);
+        $image = new Image();
+        $image->nomImage = $request->nomImage;
+        $image->categorie_id = $request->categorie_id;
+        //Condition pour vérifier si le request vient d'input FILE ou un input URL (priorité à l'input FILE)
+        if ($request->src) {
+            $request->file('src')->storePublicly('img/','public');
+            $image->src = $request->file('src')->hashName();
+        }else{
+            $fichierURL = file_get_contents($request->srcURL);
+            $lien = $request->srcURL;
+            $token = substr($lien, strrpos($lien, '/') + 1);
+            Storage::disk('public')->put('img/'.$token , $fichierURL);
+            $image->src = $token;
+        }
+
+        $image->save();
+        return redirect()->route('image.index')->with('success', $request->nom . ' bien ajouté !');
+
     }
 
     /**
@@ -80,6 +107,20 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        //
+        // $this->authorize("admin");
+        // Storage::disk('public')->delete('img/' . $image->src);
+        $image->delete();
+        return redirect()->route('image.index')->with('warning', 'Image bien supprimé');
+    }
+
+    //Function en plus qui est autorisé au role 'Membre'
+    public function gallerie()
+    {
+        $images = Image::all();
+        return view('admin.gallerie.main', compact("images"));
+    }
+    public function download(Image $image)
+    {
+        return Storage::disk('public')->download('img/' .$image->src );
     }
 }

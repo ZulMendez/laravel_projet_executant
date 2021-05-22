@@ -43,13 +43,12 @@
                 </div>
                 <!-- Navigation Links -->
                 <div class="w-50">
-                    @admin 
                     <div class="hidden pt-10 space-x-8 sm:-my-px sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
                     </div>
-    
+                    @admin
                     <div class="hidden py-3 space-x-8 sm:-my-px sm:flex">
                         <x-nav-link :href="route('avatar.index')" :active="request()->routeIs('dashboard')">
                             {{ __('Avatars') }}
@@ -63,7 +62,7 @@
                     </div>
     
                     <div class="hidden py-3 space-x-8 sm:-my-px sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('categorie.index')" :active="request()->routeIs('dashboard')">
                             {{ __('Catégories') }}
                         </x-nav-link>
                     </div>
@@ -76,7 +75,7 @@
                     @endadmin
                     
                     <div class="hidden py-3 space-x-8 sm:-my-px sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('gallerie.index')" :active="request()->routeIs('dashboard')">
                             {{ __('Gallerie') }}
                         </x-nav-link>
                     </div>
