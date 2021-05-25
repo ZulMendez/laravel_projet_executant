@@ -1,11 +1,11 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Users list') }}
+    <div class="pt-5 text-center bg-gray-50 py-5 shadow-md w-3/12 mx-auto rounded-lg">
+        <h2 class="font-semibold text-3xl">
+            Users
         </h2>
-    </x-slot>
-    <div class="py-5">
-        <div class="mx-auto sm:px-6 lg:px-8">
+    </div>
+    <div class="py-10">
+        <div class="flex justify-center mx-auto sm:px-6 lg:px-8">
             @include('layouts.flash')
             <div class="container mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 mx-auto bg-white border-b border-gray-200">

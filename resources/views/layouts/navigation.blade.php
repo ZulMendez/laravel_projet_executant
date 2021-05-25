@@ -73,7 +73,18 @@
                         </x-nav-link>
                     </div>
                     @endadmin
-                    
+                    @webmaster
+                    <div class="hidden py-3 space-x-8 sm:-my-px sm:flex">
+                        <x-nav-link :href="route('article.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('Articles') }}
+                        </x-nav-link>
+                    </div>
+                    @endwebmaster
+                    <div class="hidden py-3 space-x-8 sm:-my-px sm:flex">
+                        <x-nav-link :href="route('blog.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('Blog') }}
+                        </x-nav-link>
+                    </div>
                     <div class="hidden py-3 space-x-8 sm:-my-px sm:flex">
                         <x-nav-link :href="route('gallerie.index')" :active="request()->routeIs('dashboard')">
                             {{ __('Gallerie') }}

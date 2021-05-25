@@ -82,7 +82,7 @@ class CategorieController extends Controller
         ]);
         $categorie->nomCat = $request->nomCat;
         $categorie->save();
-        return redirect()->route('categorie.index')->with('success', 'categorie ' . $request->nom .' modifiée !');
+        return redirect()->route('categorie.index')->with('success', 'categorie ' . $request->nomCat .' modifiée !');
     }
 
     /**

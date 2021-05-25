@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AllController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ImageController;
@@ -57,4 +58,9 @@ Route::put('/admin/categorie/{id}/update', [CategorieController::class, 'update'
 // gallerie
 Route::get('/admin/gallerie', [ImageController::class, 'gallerie'])->name('gallerie.index');
 Route::get('/admin/{image}/download', [ImageController::class, 'download'])->name('gallerie.download');
+
+// blog
+Route::get('admin/blog', [ArticleController::class, 'blog'])->name('blog.index');
+Route::resource('admin/article', ArticleController::class);
+
 require __DIR__.'/auth.php';

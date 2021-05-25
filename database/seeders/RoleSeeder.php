@@ -21,6 +21,9 @@ class RoleSeeder extends Seeder
             ['nom' => 'membre',
             'created_at' => now(),
             ],
+            ['nom' => 'webMaster',
+            'created_at' => now(),
+            ],
         ]);
     }
 }

@@ -14,9 +14,9 @@ class AllController extends Controller
     }
 
     public function admin() {
-        $admin = User::all()->where('role_id', 1);
+        // $admin = User::all()->where('role_id', 1);
         $roles = Role::all();
         $avatars = Avatar::all()->slice(1);
-        return view('admin/dashboard', compact('admin', 'avatars', 'roles'));
+        return view('admin/dashboard', compact('avatars', 'roles'));
     }
 }
